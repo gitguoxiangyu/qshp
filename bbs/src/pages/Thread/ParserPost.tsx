@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 
 import { Typography } from '@mui/material'
 
-import { PostFloor } from '@/common/interfaces/response'
+import { FloorItem } from '@/common/interfaces/response'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import bbcode2html from '@/utils/bbcode/bbcode'
@@ -14,7 +14,7 @@ export type PropsType = {
   format: number
 }
 
-function ParseLegacy({ post }: { post: PostFloor }) {
+function ParseLegacy({ post }: { post: FloorItem }) {
   return (
     <div
       className="parse"
@@ -39,7 +39,7 @@ function ParseMd({ message }: { message: string }) {
   return <Typography color="text.primary" ref={el}></Typography>
 }
 
-export function ParsePost({ post }: { post: PostFloor }) {
+export function ParsePost({ post }: { post: FloorItem }) {
   return (
     <>
       {post.format == 2 ? (

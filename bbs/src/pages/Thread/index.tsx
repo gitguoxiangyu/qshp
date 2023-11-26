@@ -11,10 +11,8 @@ import Avatar from '@/components/Avatar'
 import Card from '@/components/Card'
 import Editor from '@/components/Editor'
 import { useAppState } from '@/states'
-import { chineseTime } from '@/utils/dayjs'
 
-import Floor from './Floor'
-import { ParsePost } from './ParserPost'
+import { PostFloor } from './PostFloor'
 
 function Thread() {
   const [vd, setVd] = useState<Vditor>()
@@ -52,6 +50,8 @@ function Thread() {
           const subject = data.rows[0].subject
           dispatch({ type: 'set post', payload: subject })
         }
+
+        console.log(data)
       },
     }
   )
@@ -110,45 +110,26 @@ function Thread() {
 
   return (
     <Box className="flex-1">
-      <Pagination
-        count={info?.total ? Math.ceil(info?.total / 20) : 10}
-        page={Number(searchParams.get('page')) || 1}
-        onChange={(e, value) => {
-          setSearchParams(`page=${value}`)
-        }}
-      />
+      <Box className="my-4">
+        <Pagination
+          variant="outlined"
+          shape="rounded"
+          color="primary"
+          count={info?.total ? Math.ceil(info?.total / 20) : 10}
+          page={Number(searchParams.get('page')) || 1}
+          onChange={(e, value) => {
+            setSearchParams(`page=${value}`)
+          }}
+        />
+      </Box>
       {info?.rows ? (
         info?.rows.map((item, index) => {
           return (
-            <Card className="mb-4" key={item.position}>
-              <section id={item.position.toString()}>
-                <Floor item={item} set_reply={set_reply}>
-                  <>
-                    <strong>{item.subject}</strong>
-                    <div className="text-sm text-slate-300 flex justify-between">
-                      <div>{chineseTime(item.dateline * 1000)}</div>
-                      <div className="flex flex-row gap-3 justify-between">
-                        <div
-                          className="hover:text-blue-500"
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => {
-                            navigator.clipboard.writeText(
-                              window.location.href.split('#')[0] +
-                                '#' +
-                                item.position
-                            )
-                          }}
-                        >
-                          分享
-                        </div>
-                        <div>#{item.position}</div>
-                      </div>
-                    </div>
-                    <ParsePost post={item} />
-                  </>
-                </Floor>
-              </section>
-            </Card>
+            <PostFloor
+              item={item}
+              set_reply={set_reply}
+              key={item.position}
+            ></PostFloor>
           )
         })
       ) : infoLoading ? (

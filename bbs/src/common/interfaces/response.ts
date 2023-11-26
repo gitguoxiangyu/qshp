@@ -181,10 +181,10 @@ export interface PostDetails {
   page: number
   pagesize: number
   total: number
-  rows: PostFloor[]
+  rows: FloorItem[]
 }
 
-export interface PostFloor {
+export interface FloorItem {
   post_id: number
   forum_id: number
   thread_id: number

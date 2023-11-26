@@ -4,7 +4,7 @@ import { Box, Divider, Grid, Stack, Typography, useTheme } from '@mui/material'
 
 import coverDark from '@/assets/cover-dark.jpg'
 import coverLight from '@/assets/cover-light.jpg'
-import { PostFloor } from '@/common/interfaces/response'
+import { FloorItem } from '@/common/interfaces/response'
 import Tooltip from '@/components/Tooltip'
 import { useAppState } from '@/states'
 import { chineseTime } from '@/utils/dayjs'
@@ -32,7 +32,7 @@ const GridItem = ({ title, count }: ItemProps) => {
   )
 }
 
-const Cover = ({ item }: { item: PostFloor }) => {
+const Cover = ({ item }: { item: FloorItem }) => {
   const { state } = useAppState()
   const [data, set_data] = useState({})
   return (
@@ -90,7 +90,7 @@ const Cover = ({ item }: { item: PostFloor }) => {
 }
 
 type CardProps = {
-  item: PostFloor
+  item: FloorItem
   children: React.ReactElement
 }
 
