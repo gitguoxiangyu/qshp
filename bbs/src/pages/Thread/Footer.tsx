@@ -11,7 +11,7 @@ const Footer = ({ floor, set_reply }: FooterProps) => {
     set_reply(floor)
   }
   return (
-    <Stack direction="row" className="justify-end">
+    <Stack direction="row" className="justify-start mt-5">
       <Button variant="text" className="mr-2">
         收藏
       </Button>
